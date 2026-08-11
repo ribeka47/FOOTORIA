@@ -1,0 +1,495 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+
+/* A11Y: smooth scrolling only for people who haven't asked for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* A11Y: visible outline when navigating with keyboard (Tab key) */
+a:focus-visible,
+.hero-btn:focus-visible,
+.skip-link:focus-visible {
+  outline: 3px solid #ffd700;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* A11Y: hidden "skip" link, appears only when focused (needs 1 line of HTML, see notes) */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 100;
+  background: #0b1d6a;
+  color: #fff;
+  padding: 10px 18px;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* A11Y: utility class to hide text visually but keep it for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ============ HEADER / HERO ============ */
+.header {
+  min-height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)), url('WC.jpg');
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  padding: 0 16px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+nav {
+  display: grid;
+  grid-template-columns: auto 1fr;   /* col 1 = logo, col 2 = menu */
+  align-items: center;
+  gap: 16px;
+  padding: 2% 6%;
+}
+
+nav img {
+  width: 150px;
+}
+
+/* A11Y/FIX: menu is pinned to the RIGHT column, so it stays right
+   even if the logo image file is missing */
+.nav-links,
+nav > ul {
+  grid-column: 2;
+  width: 100%;
+}
+
+.nav-links ul,
+nav > ul {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: end;              /* <- this pushes the menu to the right */
+}
+
+.nav-links ul li,
+nav > ul li {
+  list-style: none;
+  padding: 10px 12px;                /* slightly taller = easier click/tap target */
+}
+
+.nav-links ul li a,
+nav > ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.nav-links ul li::after,
+nav > ul li::after {
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: #f44336;
+  display: block;
+  margin: auto;
+  transition: 0.5s;
+}
+
+/* underline now also shows for keyboard users, not just hover */
+.nav-links ul li:hover::after,
+.nav-links ul li:focus-within::after,
+nav > ul li:hover::after,
+nav > ul li:focus-within::after {
+  width: 100%;
+}
+
+.text-box {
+  width: 90%;
+  max-width: 900px;
+  color: #fff;
+  place-self: center;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.text-box h1 {
+  font-size: 62px;
+  line-height: 1.1;
+  overflow-wrap: break-word;
+}
+
+.text-box p {
+  margin: 10px 0 40px;
+  font-size: 15px;
+  color: #fff;
+}
+
+.hero-btn {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 12px 34px;
+  font-size: 13px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.hero-btn:hover {
+  border: 1px solid #0b1d6a;
+  background: #0b1d6a;
+  transition: 1s;
+}
+
+/* ============ SECTIONS ============ */
+.panel {
+  min-height: 100vh;
+  padding: 120px 8vw 60px;
+  background: #0e1626;
+  color: #f5f5f5;
+  display: grid;
+  align-content: start;
+}
+
+.panel:nth-of-type(even) {
+  background: #111c31;
+}
+
+.panel h2 {
+  color: #c9a227;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+}
+
+.panel-img {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  border-radius: 12px;
+  margin: 24px auto;
+}
+
+.facts li {
+  margin-bottom: 8px;
+}
+
+.facts strong {
+  color: #c9a227;
+}
+
+.host-table,
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 30px 0;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.host-table th,
+.host-table td,
+.summary-table th,
+.summary-table td {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 15px;
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
+.host-table th,
+.summary-table th {
+  background: #0b6b3a;
+  color: #fff;
+  font-weight: 600;
+}
+
+.host-table tr:nth-child(even),
+.summary-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.host-table tr:hover,
+.summary-table tr:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transition: .3s;
+}
+
+.host-table td:first-child {
+  font-weight: bold;
+  color: #ffd700;
+}
+
+.summary-table {
+  max-width: 500px;
+  margin: 40px auto;
+}
+
+.summary-table td:first-child {
+  text-align: left;
+}
+
+.summary-table td:last-child {
+  font-weight: bold;
+  color: #ffd700;
+}
+
+/* ============ PLAYER CARDS (Titles) ============ */
+.cards-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.player-card {
+  display: grid;
+  grid-template-columns: 1fr 2fr;    /* odd rows: small IMG left, big TEXT right */
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* FIX to match your sketch: even rows get big TEXT left, small IMG right.
+   (Before, the text was squeezed into the narrow column on even cards.) */
+.player-card:nth-child(even) {
+  grid-template-columns: 2fr 1fr;
+}
+
+.card-img {
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  min-height: 250px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.card-content {
+  border-radius: 8px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  display: grid;
+  align-content: center;
+}
+
+.card-content h3 {
+  color: #c9a227;
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+.card-content p {
+  color: #f5f5f5;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 991px) {
+  nav {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .nav-links,
+  nav > ul {
+    grid-column: 1;
+  }
+
+  .nav-links ul,
+  nav > ul {
+    justify-content: center;
+  }
+
+  .panel {
+    padding: 90px 6vw 50px;
+  }
+
+  .text-box h1 {
+    font-size: 52px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 14px;
+  }
+
+  nav {
+    padding: 18px 5%;
+  }
+
+  nav img {
+    width: 120px;
+  }
+
+  .nav-links {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links ul,
+  nav > ul {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(auto-fit, minmax(110px, max-content));
+    justify-content: center;
+  }
+
+  .nav-links ul li,
+  nav > ul li {
+    padding: 8px 10px;
+  }
+
+  .text-box {
+    width: 92%;
+    padding: 0 12px;
+  }
+
+  .text-box h1 {
+    font-size: 40px;
+  }
+
+  .text-box p {
+    font-size: 14px;
+    margin: 10px 0 28px;
+  }
+
+  .hero-btn {
+    padding: 11px 26px;
+  }
+
+  .panel {
+    min-height: auto;
+    padding: 80px 18px 50px;
+  }
+
+  .panel h2 {
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
+
+  .panel-img {
+    margin: 18px auto;
+  }
+
+  .host-table,
+  .summary-table {
+    font-size: 13px;
+    margin: 20px 0;
+  }
+
+  .host-table th,
+  .host-table td,
+  .summary-table th,
+  .summary-table td {
+    padding: 10px 10px;
+  }
+
+  .summary-table {
+    max-width: 100%;
+  }
+
+  .player-card,
+  .player-card:nth-child(even) {
+    grid-template-columns: 1fr;      /* stack on mobile */
+  }
+
+  /* image on top for every card on mobile (same as your old column-reverse) */
+  .player-card:nth-child(even) .card-img {
+    order: -1;
+  }
+
+  .card-img {
+    min-height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+    padding: 16px 4%;
+  }
+
+  .nav-links ul,
+  nav > ul {
+    grid-template-columns: 1fr;      /* one link per row */
+  }
+
+  .nav-links ul li,
+  nav > ul li {
+    padding: 8px 0;
+  }
+
+  .nav-links ul li a,
+  nav > ul li a {
+    display: block;
+  }
+
+  .text-box h1 {
+    font-size: 32px;
+  }
+
+  .text-box p {
+    font-size: 13px;
+  }
+
+  .hero-btn {
+    padding: 10px 22px;
+    font-size: 12px;
+  }
+
+  .panel {
+    padding: 70px 14px 40px;
+  }
+
+  .panel h2 {
+    font-size: 22px;
+  }
+
+  .host-table,
+  .summary-table {
+    font-size: 12px;
+  }
+
+  .host-table th,
+  .host-table td,
+  .summary-table th,
+  .summary-table td {
+    padding: 8px 6px;
+  }
+}
+
+/* A11Y: kill animations/transitions for people who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
