@@ -11,8 +11,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-<section class="header">
+
+<section class="header" id="home">
 <nav>
+    <img src="logo1.png" style="transform: scale(2);
+    padding-left: 25px"/>
+    
 <div class="nav-links">
     <ul>
         <li><a href="#home">HOME</a></li>
@@ -23,199 +27,228 @@
     </ul>
 </div>
 </nav>
-<!-- text at the center. -->
+
 
 <div class="text-box">
     <h1>-ROAD TO GLORY-</h1>
     <p>-THE GREATEST TOURNAMENT TO EVER EXIST-</p>
     <a href="#about-wc" class="hero-btn">DISCOVER THE LEGACY</a>
-  
-</div>
+  </div>
 </section>
 </ul>
 </nav>
-
-
-
-
 <main>
-  <section id="about-wc" class="panel">
-  <h2>About WC</h2>
-  <p>The FIFA World Cup is the world's most prestigious international football tournament. Held every four years, it brings together the best national teams from around the globe to compete for the ultimate prize in football. Since its first tournament in 1930, the World Cup has become a celebration of passion, skill, teamwork, and national pride.
-     Millions of fans follow the tournament, creating an exciting atmosphere both inside stadiums and across the world. Every edition produces unforgettable moments, from stunning goals and dramatic penalty shootouts to inspiring underdog stories and legendary performances by some of football's greatest . The FIFA World Cup is more than just a sporting event—it is a global celebration that unites people of different cultures, languages, and backgrounds through their shared love of the game. As new generations of players and fans continue to embrace the tournament, the World Cup remains a symbol of excellence, sportsmanship, and the enduring spirit of football.
-  </p><br>
-  <img src="pele.jpg" alt="pele">
 
-  <h3>Quick facts</h3>
-  <ul class="facts">
-    <li><strong>Started:</strong> 1930, in Uruguay</li>
-    <li><strong>How often:</strong> every 4 years</li>
-    <li><strong>2026:</strong> the first 48-team edition</li>
-    <li><strong>Most titles:</strong> Brazil, with 5</li>
-  </ul><br>
-  </section>
+        <!-- Section 1: About World Cup -->
+        <section id="about-wc" class="panel">
+            <div class="section-header">
+                <span class="section-tag">HERITAGE</span>
+                <h2>About The World Cup</h2>
+                <div class="gold-divider"></div>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text-card">
+                    <p class="lead-text">
+                        The <strong>FIFA World Cup™</strong> is the pinnacle of international football. Held every four years, it unites the finest national squads across continents to battle for the most coveted trophy in sports.
+                    </p>
+                    <p>
+                        Since Uruguay hosted the inaugural tournament in 1930, the World Cup has grown into a global cultural spectacle. Every edition delivers timeless drama—from breathtaking bicycle kicks and nerve-wracking penalty shootouts to heroic underdog triumphs that defy the odds.
+                    </p>
+                    <p>
+                        Beyond the pitch, it serves as a beacon of unity, bringing billions of fans together across languages, borders, and generations under a single universal passion.
+                    </p>
+                </div>
+
+                <div class="about-visual-card">
+                    <div class="panel-img-frame">
+                        <img src="pele.jpg" alt="Pelé celebrating his historic World Cup triumph" class="panel-img" onerror="this.src='https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80'">
+                        <div class="img-caption-badge">
+                            <span>👑 The King of Football — Pelé</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Facts Feature Cards -->
+            <div class="facts-section">
+                <h3 class="subsection-title">Tournament Quick Facts</h3>
+                <div class="facts-grid">
+                    <div class="fact-card">
+                        <div class="fact-icon">⏳</div>
+                        <div class="fact-data">
+                            <h4>Inaugurated</h4>
+                            <p class="fact-highlight">1930</p>
+                            <span>Hosted & won by Uruguay</span>
+                        </div>
+                    </div>
+
+                    <div class="fact-card">
+                        <div class="fact-icon">📅</div>
+                        <div class="fact-data">
+                            <h4>Frequency</h4>
+                            <p class="fact-highlight">Every 4 Years</p>
+                            <span>Except 1942 & 1946</span>
+                        </div>
+                    </div>
+
+                    <div class="fact-card">
+                        <div class="fact-icon">🌎</div>
+                        <div class="fact-data">
+                            <h4>2026 Expansion</h4>
+                            <p class="fact-highlight">48 Nations</p>
+                            <span>Historic 3-host nation format</span>
+                        </div>
+                    </div>
+
+                    <div class="fact-card">
+                        <div class="fact-icon">⭐</div>
+                        <div class="fact-data">
+                            <h4>Most Decorated</h4>
+                            <p class="fact-highlight">Brazil (5)</p>
+                            <span>1958, 1962, 1970, 1994, 2002</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
  <section id="host-countries" class="panel">
  <h2>2026 WC Host Countries</h2>
     <p>USA, Canada and Mexico — the first 48-team World Cup.</p>
-     <section id="host-countries" class="panel">
-        <table class="host-table">
+<div class="table-responsive">
+    <table class="host-table">
+        <thead>
             <tr>
-            <th>Host Country</th>
-            <th>Stadium</th>
-            <th>City</th>
-            <th>Matches Hosted</th>
+                <th scope="col">Host Nation</th>
+                <th scope="col">Stadium Name</th>
+                <th scope="col">Host City</th>
+                <th scope="col">Matches Hosted</th>
             </tr>
-
-        <tr>
-            <td rowspan="2">Canada</td>
-            <td>Toronto Stadium (BMO Field)</td>
-            <td>Toronto</td>
-            <td>6</td>
-        </tr>
-
-        <tr>
-            <td>BC Place</td>
-            <td>Vancouver</td>
-            <td>7</td>
-        </tr>
-
-        <tr>
-            <td rowspan="3">Mexico</td>
-            <td>Estadio Azteca</td>
-            <td>Mexico City</td>
-            <td>5</td>
-        </tr>
-
-        <tr>
-            <td>Estadio Guadalajara</td>
-            <td>Guadalajara</td>
-            <td>4</td>
-        </tr>
-
-        <tr>
-            <td>Estadio Monterrey</td>
-            <td>Monterrey</td>
-            <td>4</td>
-        </tr>
-
-        <tr>
-            <td rowspan="11">United States</td>
-            <td>Atlanta Stadium</td>
-            <td>Atlanta</td>
-            <td>8</td>
-        </tr>
-
-        <tr>
-            <td>Boston Stadium</td>
-            <td>Boston</td>
-            <td>7</td>
-        </tr>
-
-        <tr>
-            <td>Dallas Stadium</td>
-            <td>Dallas</td>
-            <td>9</td>
-        </tr>
-
-        <tr>
-            <td>Houston Stadium</td>
-            <td>Houston</td>
-            <td>7</td>
-        </tr>
-
-        <tr>
-            <td>Kansas City Stadium</td>
-            <td>Kansas City</td>
-            <td>6</td>
-        </tr>
-
-        <tr>
-            <td>Los Angeles Stadium</td>
-            <td>Los Angeles</td>
-            <td>8</td>
-        </tr>
-
-        <tr>
-            <td>Miami Stadium</td>
-            <td>Miami</td>
-            <td>7</td>
-        </tr>
-
-        <tr>
-            <td>New York New Jersey Stadium</td>
-            <td>East Rutherford</td>
-            <td>8 (Final)</td>
-        </tr>
-
-        <tr>
-            <td>Philadelphia Stadium</td>
-            <td>Philadelphia</td>
-            <td>6</td>
-        </tr>
-
-        <tr>
-            <td>San Francisco Bay Area Stadium</td>
-            <td>Santa Clara</td>
-            <td>6</td>
-        </tr>
-
-        <tr>
-            <td>Seattle Stadium</td>
-            <td>Seattle</td>
-            <td>6</td>
-        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="2" class="country-cell canada-cell">
+                    <span class="flag">🇨🇦</span> Canada
+                </td>
+                <td>Toronto Stadium (BMO Field)</td>
+                <td>Toronto</td>
+                <td><span class="badge-match">6</span></td>
+            </tr>
+            <tr>
+                <td>BC Place</td>
+                <td>Vancouver</td>
+                <td><span class="badge-match">7</span></td>
+            </tr>
+            <tr>
+                <td rowspan="3" class="country-cell mexico-cell">
+                    <span class="flag">🇲🇽</span> Mexico
+                </td>
+                <td>Estadio Azteca</td>
+                <td>Mexico City</td>
+                <td><span class="badge-match">5 (Opening)</span></td>
+            </tr>
+            <tr>
+                <td>Estadio Guadalajara</td>
+                <td>Guadalajara</td>
+                <td><span class="badge-match">4</span></td>
+            </tr>
+            <tr>
+                <td>Estadio Monterrey</td>
+                <td>Monterrey</td>
+                <td><span class="badge-match">4</span></td>
+            </tr>
+            <tr>
+                <td rowspan="11" class="country-cell usa-cell">
+                    <span class="flag">🇺🇸</span> United States
+                </td>
+                <td>Atlanta Stadium (Mercedes-Benz)</td>
+                <td>Atlanta</td>
+                <td><span class="badge-match">8 (Semi-Final)</span></td>
+            </tr>
+            <tr>
+                <td>Boston Stadium (Gillette)</td>
+                <td>Boston</td>
+                <td><span class="badge-match">7</span></td>
+            </tr>
+            <tr>
+                <td>Dallas Stadium (AT&T)</td>
+                <td>Dallas</td>
+                <td><span class="badge-match">9 (Semi-Final)</span></td>
+            </tr>
+            <tr>
+                <td>Houston Stadium (NRG)</td>
+                <td>Houston</td>
+                <td><span class="badge-match">7</span></td>
+            </tr>
+            <tr>
+                <td>Kansas City Stadium (Arrowhead)</td>
+                <td>Kansas City</td>
+                <td><span class="badge-match">6</span></td>
+            </tr>
+            <tr>
+                <td>Los Angeles Stadium (SoFi)</td>
+                <td>Los Angeles</td>
+                <td><span class="badge-match">8</span></td>
+            </tr>
+            <tr>
+                <td>Miami Stadium (Hard Rock)</td>
+                <td>Miami</td>
+                <td><span class="badge-match">7 (Bronze Final)</span></td>
+            </tr>
+            <tr class="final-row">
+                <td><strong>New York New Jersey Stadium (MetLife)</strong></td>
+                <td><strong>East Rutherford</strong></td>
+                <td><span class="badge-match badge-gold">8 (THE FINAL 🏆)</span></td>
+            </tr>
+            <tr>
+                <td>Philadelphia Stadium (Lincoln Financial)</td>
+                <td>Philadelphia</td>
+                <td><span class="badge-match">6</span></td>
+            </tr>
+            <tr>
+                <td>San Francisco Bay Area Stadium (Levi's)</td>
+                <td>Santa Clara</td>
+                <td><span class="badge-match">6</span></td>
+            </tr>
+            <tr>
+                <td>Seattle Stadium (Lumen Field)</td>
+                <td>Seattle</td>
+                <td><span class="badge-match">6</span></td>
+            </tr>
+        </tbody>
     </table>
-
-    <h3>Tournament Summary</h3>
-
+</div>
+<div class="summary-table-wrap">
     <table class="summary-table">
-        <tr>
-            <th>Item</th>
-            <th>Number</th>
-        </tr>
-
-        <tr>
-            <td>Host Countries</td>
-            <td>3</td>
-        </tr>
-
-        <tr>
-            <td>Host Cities</td>
-            <td>16</td>
-        </tr>
-
-        <tr>
-            <td>Stadiums</td>
-            <td>16</td>
-        </tr>
-
-        <tr>
-            <td>Total Matches</td>
-            <td>104</td>
-        </tr>
-
-        <tr>
-            <td>Canada Matches</td>
-            <td>13</td>
-        </tr>
-
-        <tr>
-            <td>Mexico Matches</td>
-            <td>13</td>
-        </tr>
-
-        <tr>
-            <td>United States Matches</td>
-            <td>78</td>
-        </tr>
+        <thead>
+            <tr>
+                <th colspan="2">Match Allocation Breakdown</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>🇨🇦 Canada Matches</td>
+                <td><strong>13</strong></td>
+            </tr>
+            <tr>
+                <td>🇲🇽 Mexico Matches</td>
+                <td><strong>13</strong></td>
+            </tr>
+            <tr>
+                <td>🇺🇸 United States Matches</td>
+                <td><strong>78</strong></td>
+            </tr>
+            <tr class="total-row">
+                <td>Total Tournament Matches</td>
+                <td class="gold-text"><strong>104</strong></td>
+            </tr>
+        </tbody>
     </table>
-
-
-  </section></section>
+</div></section>
 
   <section id="unexpected-events" class="panel">
     <h2>Unexpected Events</h2>
-    <p>## Unexpected & Funny World Cup Moments
+    <p>Unexpected & Funny World Cup Moments
 
 The FIFA World Cup has produced countless unforgettable moments, many of which had fans laughing or left the football world in complete disbelief. One of the most famous surprises came in 1950 when Uruguay defeated heavily favored Brazil in the final, a result so shocking it became known as the **"Maracanazo."**
 Football has also seen its share of funny incidents. In the 1990 World Cup, England midfielder Paul Gascoigne cried after receiving a yellow card because he thought it would keep him out of the final if England qualified. Although England never reached the final, his emotional reaction became one of football's most memorable images.
@@ -256,7 +289,7 @@ These unexpected victories, emotional reactions, and unusual moments remind fans
 
   <div class="player-card">
       <div class="card-img">
-        <img src="MESSI.jpg" alt="LIONEL MESSI "
+        <img src="MESSI.jpg" alt="LIONEL MESSI ">
         <h3 style="color: #fff;">IMG</h3>
       </div>
       <div class="card-content">
@@ -273,12 +306,17 @@ These unexpected victories, emotional reactions, and unusual moments remind fans
         <p>Cristiano Ronaldo never lifted the World Cup trophy, but his tournament story is one of unmatched consistency. Across five editions from 2006 to 2022, he became the only player in history to score at five different World Cups — a record that may never be broken. His relentless drive, leadership, and extraordinary longevity made him one of the most iconic figures the tournament has ever seen.</p>
             </div>
       <div class="card-img">
-        <img src="Cristiano Ronaldo.jpg" alt="DIEOGO MARADONA IN HIS NATIONAL JERSEY"
+        <img src="Cristiano Ronaldo.jpg" alt="DIEOGO MARADONA IN HIS NATIONAL JERSEY">
         <h3 style="color: #fff;">IMG</h3>
       </div>
     </div>
 </section>
+
+<footer class="footer">
+  <p>&copy; 2026 FOOTORIA MADE BY RIBEKA TARIKU . All rights reserved.</p>
+</footer>
+
 </main>
 
 </body>
-</html> 
+</html>

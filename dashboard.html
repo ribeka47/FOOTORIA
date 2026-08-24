@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile Builder — 2027–2028 Study Abroad Strategic Prep</title>
+
+  <!-- Typography: Space Grotesk & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ================= DESIGN SYSTEM TOKENS ================= */
+    :root {
+      /* Dark Theme (Default) */
+      --bg-primary: #0A0A0B;
+      --bg-secondary: #141416;
+      --bg-tertiary: #1C1C1F;
+      --border-color: #2A2A2E;
+      --border-hover: #3E3E44;
+
+      --text-primary: #ECECEF;
+      --text-secondary: #8B8B8D;
+      --text-tertiary: #5A5A5C;
+
+      --accent-primary: #6C5CE7;
+      --accent-primary-hover: #7D6DF8;
+      --accent-primary-tint: rgba(108, 92, 231, 0.12);
+
+      --accent-success: #2ED4A0;
+      --accent-success-tint: rgba(46, 212, 160, 0.12);
+
+      --accent-warning: #F0A500;
+      --accent-warning-tint: rgba(240, 165, 0, 0.12);
+
+      --accent-urgent: #E74C5E;
+      --accent-urgent-tint: rgba(231, 76, 94, 0.12);
+
+      --accent-info: #4DA8DA;
+      --accent-info-tint: rgba(77, 168, 218, 0.12);
+
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Space Grotesk', sans-serif;
+      
+      --sidebar-width: 250px;
+      --radius-card: 12px;
+      --radius-control: 8px;
+      --radius-pill: 9999px;
+      --transition: 180ms ease;
+    }
+
+    html.light {
+      --bg-primary: #FAFAFA;
+      --bg-secondary: #FFFFFF;
+      --bg-tertiary: #F3F3F5;
+      --border-color: #E5E5E7;
+      --border-hover: #D0D0D4;
+
+      --text-primary: #1A1A1B;
+      --text-secondary: #6B6B6E;
+      --text-tertiary: #9B9B9E;
+
+      --accent-primary: #5B4BD8;
+      --accent-primary-hover: #4E3DC8;
+      --accent-primary-tint: rgba(91, 75, 216, 0.10);
+
+      --accent-success: #1FB888;
+      --accent-success-tint: rgba(31, 184, 136, 0.10);
+
+      --accent-warning: #D98C00;
+      --accent-warning-tint: rgba(217, 140, 0, 0.10);
+
+      --accent-urgent: #D4384B;
+      --accent-urgent-tint: rgba(212, 56, 75, 0.10);
+
+      --accent-info: #3593C7;
+      --accent-info-tint: rgba(53, 147, 199, 0.10);
+    }
+
+    /* Reset & Base Setup */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+
+    /* ================= LAYOUT ATOMS ================= */
+    .sidebar {
+      width: var(--sidebar-width);
+      background-color: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 30;
+      transition: width var(--transition);
+    }
+
+    .main-wrapper {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      transition: margin-left var(--transition);
+    }
+
+    .top-bar {
+      height: 56px;
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .content-container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px;
+      flex: 1;
+    }
+
+    /* ================= COMPONENT STYLES ================= */
+    .card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      transition: border-color var(--transition), background-color var(--transition);
+    }
+    .card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .btn {
+      height: 36px;
+      padding: 0 14px;
+      border-radius: var(--radius-control);
+      font-size: 13px;
+      font-weight: 500;
+      font-family: var(--font-body);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      border: none;
+      transition: background-color var(--transition), border-color var(--transition), color var(--transition);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background-color: var(--accent-primary);
+      color: #FFFFFF;
+    }
+    .btn-primary:hover {
+      background-color: var(--accent-primary-hover);
+    }
+    .btn-secondary {
+      background-color: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+    }
+    .btn-secondary:hover {
+      background-color: var(--bg-tertiary);
+      border-color: var(--border-hover);
+    }
+    .btn-ghost {
+      background-color: transparent;
+      color: var(--text-secondary);
+    }
+    .btn-ghost:hover {
+      background-color: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    /* Form Controls */
+    input[type="text"], input[type="search"], select, textarea {
+      width: 100%;
+      height: 38px;
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-control);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 13px;
+      padding: 0 12px;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    textarea {
+      height: auto;
+      padding: 10px 12px;
+      resize: vertical;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent-primary);
+    }
+
+    /* Pill Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 24px;
+      padding: 0 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .badge-primary { background: var(--accent-primary-tint); color: var(--accent-primary); }
+    .badge-success { background: var(--accent-success-tint); color: var(--accent-success); }
+    .badge-warning { background: var(--accent-warning-tint); color: var(--accent-warning); }
+    .badge-urgent  { background: var(--accent-urgent-tint);  color: var(--accent-urgent); }
+    .badge-info    { background: var(--accent-info-tint);    color: var(--accent-info); }
+    .badge-neutral { background: var(--bg-tertiary); color: var(--text-secondary); }
+
+    /* Progress Bar */
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background-color: var(--bg-tertiary);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background-color: var(--accent-primary);
+      border-radius: var(--radius-pill);
+      transition: width 300ms ease;
+    }
+
+    /* Navigation Items in Sidebar */
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      margin: 2px 12px;
+      border-radius: var(--radius-control);
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all var(--transition);
+      user-select: none;
+    }
+    .nav-item:hover {
+      background-color: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+    .nav-item.active {
+      background-color: var(--accent-primary-tint);
+      color: var(--text-primary);
+      border-color: rgba(108, 92, 231, 0.25);
+    }
+    .nav-item.active i {
+      color: var(--accent-primary);
+    }
+
+    /* Tables & Compact Lists */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .data-table th {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 13px;
+      color: var(--text-primary);
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+    .data-table tbody tr:hover {
+      background-color: var(--bg-tertiary);
+    }
+
+    /* Modal System */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms ease;
+    }
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-panel {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-card);
+      width: 100%;
+      max-width: 540px;
+      padding: 28px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+      transform: scale(0.97);
+      transition: transform 200ms ease;
+    }
+    .modal-backdrop.open .modal-panel {
+      transform: scale(1);
+    }
+
+    /* Toast Container */
+    #toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 120;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .toast {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 12px 18px;
+      border-radius: var(--radius-control);
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      pointer-events: auto;
+      animation: toastIn 200ms ease forwards;
+    }
+    @keyframes toastIn {
+      from { transform: translateY(-10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Layout Utility Classes */
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-2 { gap: 8px; }
+    .gap-3 { gap: 12px; }
+    .gap-4 { gap: 16px; }
+    .gap-6 { gap: 24px; }
+    .grid { display: grid; }
+    .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .hidden { display: none !important; }
+
+    @media (max-width: 900px) {
+      .sidebar { width: 64px; }
+      .sidebar .nav-label, .sidebar .profile-meta { display: none; }
+      .main-wrapper { margin-left: 64px; }
+      .grid-cols-3, .grid-cols-4 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= TOAST CONTAINER ================= -->
+  <div id="toast-container"></div>
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <!-- Workspace Brand Header -->
+    <div style="padding: 20px 16px 16px; border-bottom: 1px solid var(--border-color);">
+      <div class="flex items-center gap-3">
+        <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--accent-primary); display: flex; align-items: center; justify-content: center; color: white;">
+          <i data-lucide="compass" style="width: 18px; height: 18px;"></i>
+        </div>
+        <div class="nav-label">
+          <div style="font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: var(--text-primary);">Antigravity Prep</div>
+          <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.04em;">2027–2028 Cycle</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav style="padding: 16px 0; flex: 1;">
+      <div class="nav-item active" onclick="switchTab('roadmap')" id="nav-roadmap">
+        <i data-lucide="map" style="width: 18px; height: 18px;"></i>
+        <span class="nav-label">1. 12-Month Roadmap</span>
+      </div>
+      <div class="nav-item" onclick="switchTab('scholarships')" id="nav-scholarships">
+        <i data-lucide="award" style="width: 18px; height: 18px;"></i>
+        <span class="nav-label">2. Scholarship Pipeline</span>
+      </div>
+      <div class="nav-item" onclick="switchTab('portfolio')" id="nav-portfolio">
+        <i data-lucide="layers" style="width: 18px; height: 18px;"></i>
+        <span class="nav-label">3. Design Portfolio Hub</span>
+      </div>
+      <div class="nav-item" onclick="switchTab('impact')" id="nav-impact">
+        <i data-lucide="file-text" style="width: 18px; height: 18px;"></i>
+        <span class="nav-label">4. EC Impact Log (CAR)</span>
+      </div>
+      <div class="nav-item" onclick="switchTab('testprep')" id="nav-testprep">
+        <i data-lucide="clock" style="width: 18px; height: 18px;"></i>
+        <span class="nav-label">5. Test Prep & Habit</span>
+      </div>
+      <div class="nav-item" onclick="switchTab('universities')" id="nav-universities">
+        <i data-lucide="landmark" style="width: 18px; height: 18px;"></i>
+        <span class="nav-label">6. University Database</span>
+      </div>
+    </nav>
+
+    <!-- Student Profile Metadata Block -->
+    <div class="profile-meta" style="padding: 16px; border-top: 1px solid var(--border-color); background: var(--bg-primary);">
+      <div class="flex items-center justify-between" style="margin-bottom: 8px;">
+        <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.05em;">Readiness</span>
+        <span id="sidebar-progress-num" style="font-size: 12px; font-weight: 600; color: var(--accent-primary);">0%</span>
+      </div>
+      <div class="progress-track" style="margin-bottom: 12px;">
+        <div class="progress-fill" id="sidebar-progress-bar" style="width: 0%;"></div>
+      </div>
+      <div style="font-size: 12px; color: var(--text-secondary);">
+        <strong style="color: var(--text-primary);">Grade 12 • Addis Ababa</strong><br />
+        Spike: Brand Systems & Civic
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN VIEW WRAPPER ================= -->
+  <div class="main-wrapper">
+
+    <!-- Top Context Bar -->
+    <header class="top-bar">
+      <div class="flex items-center gap-3">
+        <span style="font-size: 12px; color: var(--text-secondary);">Workspace</span>
+        <span style="font-size: 12px; color: var(--border-color);">/</span>
+        <span id="breadcrumb-title" style="font-size: 13px; font-weight: 600; color: var(--text-primary);">12-Month Profile Roadmap</span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Theme Toggle -->
+        <button class="btn btn-ghost" onclick="toggleTheme()" title="Toggle Dark/Light Mode" style="width: 36px; padding: 0;">
+          <i data-lucide="sun" id="theme-icon" style="width: 18px; height: 18px;"></i>
+        </button>
+        <!-- JSON Backup Export -->
+        <button class="btn btn-secondary" onclick="exportData()" title="Export JSON Backup">
+          <i data-lucide="download" style="width: 15px; height: 15px;"></i>
+          <span>Backup</span>
+        </button>
+        <!-- Print Summary -->
+        <button class="btn btn-secondary" onclick="window.print()" title="Print Overview">
+          <i data-lucide="printer" style="width: 15px; height: 15px;"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Dynamic Content Area -->
+    <div class="content-container">
+
+      <!-- ================= TAB 1: 12-MONTH ROADMAP ================= -->
+      <section id="tab-roadmap" class="tab-pane">
+        
+        <!-- Header Banner -->
+        <div class="card" style="margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+          <div>
+            <div class="badge badge-primary" style="margin-bottom: 8px;">2027–2028 Academic Cycle Strategy</div>
+            <h2 style="font-size: 22px; margin-bottom: 6px;">Strategic Gap/Prep Runway</h2>
+            <p style="font-size: 14px; color: var(--text-secondary); max-width: 680px;">
+              Manage your 12-month timeline deliberately. Complete Grade 12 national examinations (ESLCE) first, then transition into your focused brand design spike and standardized testing without rushing.
+            </p>
+          </div>
+          <button class="btn btn-primary" onclick="openModal('modal-task')">
+            <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+            <span>Add Milestone</span>
+          </button>
+        </div>
+
+        <!-- Filter Sub-nav -->
+        <div class="flex items-center gap-2" style="margin-bottom: 16px;">
+          <button class="btn btn-secondary btn-phase active" onclick="filterRoadmap('all', this)">All Phases</button>
+          <button class="btn btn-ghost btn-phase" onclick="filterRoadmap(1, this)">Phase 1: Academics & ESLCE</button>
+          <button class="btn btn-ghost btn-phase" onclick="filterRoadmap(2, this)">Phase 2: Civic Design Spike</button>
+          <button class="btn btn-ghost btn-phase" onclick="filterRoadmap(3, this)">Phase 3: Testing & Docs</button>
+          <button class="btn btn-ghost btn-phase" onclick="filterRoadmap(4, this)">Phase 4: Applications</button>
+        </div>
+
+        <!-- Task Grid -->
+        <div id="roadmap-list" class="grid grid-cols-2 gap-3">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- ================= TAB 2: SCHOLARSHIP PIPELINE ================= -->
+      <section id="tab-scholarships" class="tab-pane hidden">
+        <div class="grid grid-cols-3 gap-6">
+          
+          <!-- Left: Alignment Engine -->
+          <div class="card" style="height: fit-content;">
+            <div class="flex items-center justify-between" style="margin-bottom: 16px;">
+              <h3 style="font-size: 16px;">Profile Fit Engine</h3>
+              <span class="badge badge-success" id="fit-score-badge">94 / 100 FIT</span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 20px;">
+              Tune your parameters to dynamically recalculate institutional alignment across global opportunities.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <div>
+                <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">Demonstrated Need</label>
+                <select id="calc-need" onchange="runFitCalculation()">
+                  <option value="100">Zero EFC ($0–$1,000 / year) — Full Need</option>
+                  <option value="70">Low EFC ($1,500–$4,000 / year)</option>
+                  <option value="40">Moderate Contribution ($5,000+)</option>
+                </select>
+              </div>
+
+              <div>
+                <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">Design Spike Depth</label>
+                <select id="calc-spike" onchange="runFitCalculation()">
+                  <option value="100">Civic Flagship (Ethiopic Font / Health System)</option>
+                  <option value="75">Regional Workshop Leader + Freelance</option>
+                  <option value="45">Standard School Club Involvement</option>
+                </select>
+              </div>
+
+              <div>
+                <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">Test Score Benchmark</label>
+                <select id="calc-test" onchange="runFitCalculation()">
+                  <option value="95">1450+ SAT / 130+ DET (Elite Tier)</option>
+                  <option value="75">1350–1440 SAT / 115–125 DET</option>
+                  <option value="50">Diagnostic / Test-Optional</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Tracked Opportunities -->
+          <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 16px;">
+            <div class="flex items-center justify-between">
+              <h3 style="font-size: 18px;">Curated Scholarship Matrix</h3>
+              <span style="font-size: 12px; color: var(--text-secondary);" id="scholarship-count-label">5 Opportunities</span>
+            </div>
+            <div id="scholarship-list" style="display: flex; flex-direction: column; gap: 12px;">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 3: DESIGN PORTFOLIO STUDIO ================= -->
+      <section id="tab-portfolio" class="tab-pane hidden">
+        
+        <div class="card" style="margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <div class="badge badge-primary" style="margin-bottom: 8px;">Case Study Architecture</div>
+            <h2 style="font-size: 22px; margin-bottom: 4px;">Applied Brand Design Portfolio</h2>
+            <p style="font-size: 14px; color: var(--text-secondary);">
+              Structure your design work around tangible community problems in Ethiopia: Problem &rarr; Research &rarr; Prototype &rarr; Real Metric.
+            </p>
+          </div>
+          <button class="btn btn-primary" onclick="openModal('modal-project')">
+            <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+            <span>New Case Study</span>
+          </button>
+        </div>
+
+        <div id="portfolio-grid" class="grid grid-cols-3 gap-4" style="margin-bottom: 24px;">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Slideroom Standards Checklist -->
+        <div class="card">
+          <h3 style="font-size: 16px; margin-bottom: 16px;">Slideroom / Maker Portfolio Supplement Standards</h3>
+          <div class="grid grid-cols-3 gap-4">
+            <div style="padding: 16px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius-control);">
+              <div style="font-size: 13px; font-weight: 600; margin-bottom: 4px; color: var(--text-primary);">1. Curation (8–12 Slides)</div>
+              <p style="font-size: 12px; color: var(--text-secondary);">Show iterations, field tests, typography scales, and real Ethiopian contexts. Avoid isolated logos.</p>
+            </div>
+            <div style="padding: 16px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius-control);">
+              <div style="font-size: 13px; font-weight: 600; margin-bottom: 4px; color: var(--text-primary);">2. Concise Rationales</div>
+              <p style="font-size: 12px; color: var(--text-secondary);">Limit descriptions to 100 words per slide: Focus strictly on constraints, cultural insight, and measurable result.</p>
+            </div>
+            <div style="padding: 16px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius-control);">
+              <div style="font-size: 13px; font-weight: 600; margin-bottom: 4px; color: var(--text-primary);">3. 60s Video Walkthrough</div>
+              <p style="font-size: 12px; color: var(--text-secondary);">Include a short walkthrough of your Figma UI kit or physical print deployment at local health posts.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 4: EC IMPACT LOG ================= -->
+      <section id="tab-impact" class="tab-pane hidden">
+        
+        <div class="flex items-center justify-between" style="margin-bottom: 24px;">
+          <div>
+            <h2 style="font-size: 22px; margin-bottom: 4px;">Extracurricular Impact Journal</h2>
+            <p style="font-size: 14px; color: var(--text-secondary);">
+              Capture monthly activities using the CAR model: Context &rarr; Action &rarr; Result &rarr; Essay Hook.
+            </p>
+          </div>
+          <button class="btn btn-primary" onclick="openModal('modal-impact')">
+            <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+            <span>Log Monthly Milestone</span>
+          </button>
+        </div>
+
+        <!-- Metrics Row -->
+        <div class="grid grid-cols-4 gap-4" style="margin-bottom: 24px;">
+          <div class="card" style="padding: 16px;">
+            <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.05em;">Logs Recorded</div>
+            <div style="font-family: var(--font-heading); font-size: 24px; font-weight: 700; margin-top: 4px;" id="stat-log-count">0</div>
+          </div>
+          <div class="card" style="padding: 16px;">
+            <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.05em;">People Impacted</div>
+            <div style="font-family: var(--font-heading); font-size: 24px; font-weight: 700; margin-top: 4px; color: var(--accent-success);" id="stat-impact-people">0</div>
+          </div>
+          <div class="card" style="padding: 16px;">
+            <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.05em;">Flagship Sprints</div>
+            <div style="font-family: var(--font-heading); font-size: 24px; font-weight: 700; margin-top: 4px; color: var(--accent-primary);" id="stat-impact-projects">0</div>
+          </div>
+          <div class="card" style="padding: 16px;">
+            <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.05em;">Essay Snippets</div>
+            <div style="font-family: var(--font-heading); font-size: 24px; font-weight: 700; margin-top: 4px; color: var(--accent-warning);" id="stat-impact-hooks">0</div>
+          </div>
+        </div>
+
+        <div id="impact-log-list" style="display: flex; flex-direction: column; gap: 12px;">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- ================= TAB 5: TEST PREP & ACADEMICS ================= -->
+      <section id="tab-testprep" class="tab-pane hidden">
+        <div class="grid grid-cols-3 gap-6">
+          
+          <!-- Score Targets -->
+          <div class="card">
+            <h3 style="font-size: 16px; margin-bottom: 16px;">Standardized Testing Targets</h3>
+
+            <!-- SAT Score Matrix -->
+            <div style="margin-bottom: 24px;">
+              <div class="flex items-center justify-between" style="margin-bottom: 8px;">
+                <span style="font-size: 13px; font-weight: 600;">Digital SAT Score</span>
+                <span class="badge badge-primary" id="sat-total-badge">1420 / 1600</span>
+              </div>
+
+              <div style="margin-bottom: 14px;">
+                <div class="flex justify-between" style="font-size: 12px; color: var(--text-secondary); margin-bottom: 4px;">
+                  <span>Math Subscore (Goal: 780+)</span>
+                  <span id="sat-math-num" style="color: var(--text-primary); font-weight: 600;">760</span>
+                </div>
+                <input type="range" id="sat-math-range" min="500" max="800" step="10" value="760" oninput="updateScores()" style="width: 100%; accent-color: var(--accent-primary);" />
+              </div>
+
+              <div>
+                <div class="flex justify-between" style="font-size: 12px; color: var(--text-secondary); margin-bottom: 4px;">
+                  <span>Reading & Writing (Goal: 720+)</span>
+                  <span id="sat-rw-num" style="color: var(--text-primary); font-weight: 600;">660</span>
+                </div>
+                <input type="range" id="sat-rw-range" min="500" max="800" step="10" value="660" oninput="updateScores()" style="width: 100%; accent-color: var(--accent-primary);" />
+              </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid var(--border-color); margin-bottom: 20px;" />
+
+            <!-- DET Score -->
+            <div>
+              <div class="flex items-center justify-between" style="margin-bottom: 8px;">
+                <span style="font-size: 13px; font-weight: 600;">Duolingo English Test</span>
+                <span class="badge badge-success" id="det-num-badge">135 / 160</span>
+              </div>
+              <input type="range" id="det-range" min="90" max="160" step="5" value="135" oninput="updateScores()" style="width: 100%; accent-color: var(--accent-success); margin-bottom: 8px;" />
+              <p style="font-size: 11px; color: var(--text-secondary);">Accepted by Yale, Columbia, Amherst. Online, home-tested, low friction ($65).</p>
+            </div>
+          </div>
+
+          <!-- 45-Min Habit Timer -->
+          <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="flex items-center justify-between" style="margin-bottom: 8px;">
+                <h3 style="font-size: 16px;">Daily Spaced Study Habit</h3>
+                <span class="badge badge-primary">14-Day Streak</span>
+              </div>
+              <p style="font-size: 12px; color: var(--text-secondary);">
+                45 minutes per day of structured Khan Academy prep ensures 1500+ readiness without causing academic fatigue.
+              </p>
+            </div>
+
+            <div style="text-align: center; padding: 24px 0;">
+              <div id="timer-clock" style="font-family: var(--font-heading); font-size: 48px; font-weight: 700; letter-spacing: -0.02em;">45:00</div>
+              <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Today: SAT RW Inference & Rhetoric</div>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <button class="btn btn-primary" id="timer-btn" onclick="toggleTimer()" style="flex: 1;">
+                <i data-lucide="play" style="width: 15px; height: 15px;"></i>
+                <span>Start Sprint</span>
+              </button>
+              <button class="btn btn-secondary" onclick="resetTimer()">Reset</button>
+            </div>
+          </div>
+
+          <!-- National Exam Shield Rules -->
+          <div class="card">
+            <h3 style="font-size: 16px; margin-bottom: 14px;">National Exam Balance Shield</h3>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div style="padding: 14px; background: var(--accent-urgent-tint); border: 1px solid rgba(231, 76, 94, 0.2); border-radius: var(--radius-control);">
+                <div style="font-size: 12px; font-weight: 600; color: var(--accent-urgent); margin-bottom: 4px;">Rule 1: ESLCE Blackout Period</div>
+                <p style="font-size: 12px; color: var(--text-primary); line-height: 1.4;">
+                  Zero international test mocks in the 3 weeks prior to Grade 12 National Exams. Secondary school GPAs cannot be changed.
+                </p>
+              </div>
+
+              <div style="padding: 14px; background: var(--accent-info-tint); border: 1px solid rgba(77, 168, 218, 0.2); border-radius: var(--radius-control);">
+                <div style="font-size: 12px; font-weight: 600; color: var(--accent-info); margin-bottom: 4px;">Rule 2: Post-Graduation Momentum</div>
+                <p style="font-size: 12px; color: var(--text-primary); line-height: 1.4;">
+                  Schedule your primary SAT sitting in Month 7 or 8 (after national exams) when you have 100% daily mental bandwidth.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 6: UNIVERSITY DATABASE ================= -->
+      <section id="tab-universities" class="tab-pane hidden">
+        
+        <!-- Filter Controls Bar -->
+        <div class="card" style="padding: 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+          <div style="position: relative; max-width: 320px; width: 100%;">
+            <input type="search" id="uni-search-input" placeholder="Search school, country..." oninput="filterUniTable()" style="padding-left: 36px;" />
+            <i data-lucide="search" style="position: absolute; left: 12px; top: 11px; width: 16px; height: 16px; color: var(--text-secondary);"></i>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <select id="uni-region-select" onchange="filterUniTable()" style="width: 160px;">
+              <option value="all">All Regions</option>
+              <option value="USA">United States</option>
+              <option value="France">France</option>
+              <option value="UK">United Kingdom</option>
+              <option value="Italy">Italy</option>
+              <option value="Pan-Africa">Pan-Africa</option>
+            </select>
+
+            <select id="uni-aid-select" onchange="filterUniTable()" style="width: 180px;">
+              <option value="all">All Aid Policies</option>
+              <option value="Need-Blind">Need-Blind for Intl</option>
+              <option value="Full-Ride">Mastercard / Full-Ride</option>
+              <option value="100% Need">Meets 100% Need</option>
+              <option value="Regional Grant">European Regional</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Table View -->
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>University</th>
+                <th>Region</th>
+                <th>Financial Aid Policy</th>
+                <th>Portfolio Supplement</th>
+                <th>Alignment</th>
+              </tr>
+            </thead>
+            <tbody id="uni-table-body">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ================= MODAL: ADD TASK ================= -->
+  <div id="modal-task" class="modal-backdrop">
+    <div class="modal-panel">
+      <div class="flex items-center justify-between" style="margin-bottom: 20px;">
+        <h3 style="font-size: 18px;">Add Milestone Task</h3>
+        <button class="btn btn-ghost" onclick="closeModal('modal-task')" style="padding: 0; width: 32px;"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px;">
+        <div>
+          <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">Task Title</label>
+          <input type="text" id="task-input-title" placeholder="e.g. Schedule Bluebook practice mock" />
+        </div>
+        <div>
+          <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">Strategic Phase</label>
+          <select id="task-input-phase">
+            <option value="1">Phase 1: Academics & ESLCE (M 1–3)</option>
+            <option value="2">Phase 2: Civic Design Spike (M 4–6)</option>
+            <option value="3">Phase 3: Testing & Docs (M 7–9)</option>
+            <option value="4">Phase 4: Applications (M 10–12)</option>
+          </select>
+        </div>
+        <div>
+          <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">Target Month</label>
+          <input type="text" id="task-input-due" placeholder="e.g. Month 4 (November)" />
+        </div>
+      </div>
+      <div class="flex justify-between">
+        <button class="btn btn-secondary" onclick="closeModal('modal-task')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveTask()">Save Milestone</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: ADD CASE STUDY ================= -->
+  <div id="modal-project" class="modal-backdrop">
+    <div class="modal-panel">
+      <div class="flex items-center justify-between" style="margin-bottom: 20px;">
+        <h3 style="font-size: 18px;">New Design Case Study</h3>
+        <button class="btn btn-ghost" onclick="closeModal('modal-project')" style="padding: 0; width: 32px;"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px;">
+        <div>
+          <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">Project Title</label>
+          <input type="text" id="proj-input-title" placeholder="e.g. Ethiopic Typography & Ge'ez UI System" />
+        </div>
+        <div>
+          <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">Core Problem in Ethiopia</label>
+          <textarea id="proj-input-problem" rows="2" placeholder="What communication or access barrier are you solving?"></textarea>
+        </div>
+        <div>
+          <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">Visual Design Solution</label>
+          <textarea id="proj-input-solution" rows="2" placeholder="Brand identity system, iconography, open-source font family..."></textarea>
+        </div>
+        <div>
+          <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">Measurable Outcome</label>
+          <input type="text" id="proj-input-metric" placeholder="e.g. 120+ downloads, deployed across 2 clinics" />
+        </div>
+      </div>
+      <div class="flex justify-between">
+        <button class="btn btn-secondary" onclick="closeModal('modal-project')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveProject()">Save Case Study</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: ADD IMPACT LOG ================= -->
+  <div id="modal-impact" class="modal-backdrop">
+    <div class="modal-panel">
+      <div class="flex items-center justify-between" style="margin-bottom: 20px;">
+        <h3 style="font-size: 18px;">Log Monthly Extracurricular Impact</h3>
+        <button class="btn btn-ghost" onclick="closeModal('modal-impact')" style="padding: 0; width: 32px;"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px;">
+        <div>
+          <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">Leadership Role / Activity</label>
+          <input type="text" id="impact-input-role" placeholder="e.g. Founder & Instructor, Youth Design Guild" />
+        </div>
+        <div>
+          <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">Context & Challenge (C)</label>
+          <textarea id="impact-input-c" rows="2" placeholder="Lack of digital design curriculum in local schools..."></textarea>
+        </div>
+        <div>
+          <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">Tangible Action Taken (A)</label>
+          <textarea id="impact-input-a" rows="2" placeholder="Organized 4 weekend Figma workshops for 28 students..."></textarea>
+        </div>
+        <div>
+          <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">Quantifiable Result (R)</label>
+          <input type="text" id="impact-input-r" placeholder="e.g. 28 students trained, 14 published portfolios" />
+        </div>
+        <div>
+          <label style="display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">Personal Reflection / Essay Hook</label>
+          <textarea id="impact-input-ref" rows="2" placeholder="Realized visual communication in local languages expands digital equity..."></textarea>
+        </div>
+      </div>
+      <div class="flex justify-between">
+        <button class="btn btn-secondary" onclick="closeModal('modal-impact')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveImpactLog()">Save Log</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= APPLICATION CORE JAVASCRIPT ================= -->
+  <script>
+    // --- STATE MANAGEMENT ---
+    const initialSeed = {
+      tasks: [
+        { id: 1, phase: 1, title: "Audit Grade 9–11 transcripts & target top 5% in Grade 12 national curriculum", due: "Month 1", done: false },
+        { id: 2, phase: 1, title: "Sit for full diagnostic SAT on College Board Bluebook app", due: "Month 1", done: false },
+        { id: 3, phase: 1, title: "Archive all past commercial design work into structured Figma catalog", due: "Month 1", done: false },
+        { id: 4, phase: 1, title: "Execute Grade 12 National Exam (ESLCE) with 80% focus block", due: "Month 2–3", done: false },
+        { id: 5, phase: 2, title: "Launch Flagship Civic Design Project (Ethiopic Typography / Health System)", due: "Month 4", done: false },
+        { id: 6, phase: 2, title: "Host 4-week youth design workshop at local school or community center", due: "Month 5", done: false },
+        { id: 7, phase: 2, title: "Publish minimalist portfolio site with 3 detailed case studies", due: "Month 6", done: false },
+        { id: 8, phase: 3, title: "Take official Digital SAT #1 (Target: 1450+ with 750+ Math)", due: "Month 7", done: false },
+        { id: 9, phase: 3, title: "Complete Duolingo English Test (DET Target: 130+)", due: "Month 7", done: false },
+        { id: 10, phase: 3, title: "Align with high school teachers & submit detailed Recommender Brag Sheet", due: "Month 8", done: false },
+        { id: 11, phase: 3, title: "Prepare family tax/income documentation for CSS Profile / ISFAA", due: "Month 8", done: false },
+        { id: 12, phase: 4, title: "Finalize Common App personal essay: 'Design as an Equalizer in Africa'", due: "Month 10", done: false },
+        { id: 13, phase: 4, title: "Submit Early Action / Early Decision & Mastercard Foundation applications", due: "Month 11", done: false },
+        { id: 14, phase: 4, title: "Submit Regular Decision US & European university dossiers", due: "Month 12", done: false }
+      ],
+      scholarships: [
+        { id: 1, name: "Mastercard Foundation Scholars Program", institution: "Sciences Po / Edinburgh / Toronto / ALU", coverage: "100% Full Ride", deadline: "Dec 2026 – Jan 2027", match: 96, notes: "Prioritizes transformative African leadership and civic engagement." },
+        { id: 2, name: "US Need-Blind Full-Need Aid", institution: "Amherst / Harvard / Princeton / Yale / Dartmouth / Bowdoin", coverage: "100% Demonstrated Need ($0 EFC)", deadline: "Nov 1 (ED) / Jan 1 (RD)", match: 93, notes: "Evaluates application without financial penalty; values deep spike." },
+        { id: 3, name: "Berea College International Award", institution: "Berea College (USA)", coverage: "100% Tuition + Living Grant", deadline: "Oct 15 – Nov 30", match: 91, notes: "Admits only high-need students globally; aligns with design & craft." },
+        { id: 4, name: "Italian DSU Regional Scholarship", institution: "Politecnico di Milano / Torino", coverage: "Tuition Waiver + €7,500/yr Stipend", deadline: "March – May 2027", match: 89, notes: "Top-tier Communication Design degrees with income-based grant." },
+        { id: 5, name: "Stipendium Hungaricum", institution: "Hungarian State Universities", coverage: "Full Tuition + Housing + Allowance", deadline: "Jan 15, 2027", match: 85, notes: "Bilateral quota program with reserved slots for Ethiopian citizens." }
+      ],
+      projects: [
+        { id: 1, title: "Ethiopic Typography & Accessible Ge'ez UI Kit", problem: "Ethiopian digital products lack modern, screen-optimized Ge'ez typography hierarchies for mobile apps.", solution: "Engineered an open-source 6-weight variable Ethiopic font family and Figma component library.", metric: "Adopted by 120+ designers and 2 local student startups.", status: "Active Iteration" },
+        { id: 2, title: "Visual Health Literacy System for Rural Clinics", problem: "40% of patients at regional clinics struggle with English-only prescription and dosage flyers.", solution: "Developed an illustrated, language-agnostic pictographic medicine schedule card system.", metric: "Tested with 250+ patients; improved dosage comprehension by 85%.", status: "Field Testing" },
+        { id: 3, title: "Artisanal Cooperative Identity & Packaging", problem: "Local handloom textile artisans lacked professional branding to command premium retail margins.", solution: "Designed cultural identity narratives, logo marks, and low-cost eco-friendly kraft packaging.", metric: "Enabled 18 artisans to increase direct sales margins by 35%.", status: "Completed" }
+      ],
+      impactLogs: [
+        { id: 1, date: "October 2026", role: "Founder & Lead Facilitator, Visual Stories Guild", context: "Local public high school had zero digital design or visual literacy extracurriculars.", action: "Organized 4 weekend Figma & visual storytelling workshops using community computers.", result: "28 students trained; 14 created public interest posters for school.", reflection: "Learned that visual communication in local languages is a vital component of digital inclusion in East Africa.", people: 28 }
+      ],
+      universities: [
+        { name: "Amherst College", country: "USA", region: "USA", aid: "Need-Blind", slideroom: "Optional Arts Supplement", match: 95 },
+        { name: "Sciences Po", country: "France", region: "France", aid: "Full-Ride", slideroom: "Mastercard Dossier", match: 96 },
+        { name: "Berea College", country: "USA", region: "USA", aid: "Full-Ride", slideroom: "Via Portfolio Essay", match: 92 },
+        { name: "University of Edinburgh", country: "UK", region: "UK", aid: "Full-Ride", slideroom: "Mastercard Foundation", match: 94 },
+        { name: "Politecnico di Milano", country: "Italy", region: "Italy", aid: "Regional Grant", slideroom: "Required for Design", match: 90 },
+        { name: "Williams College", country: "USA", region: "USA", aid: "100% Need", slideroom: "Optional Supplement", match: 93 },
+        { name: "African Leadership University", country: "Rwanda/Mauritius", region: "Pan-Africa", aid: "Full-Ride", slideroom: "Leadership Project", match: 95 }
+      ]
+    };
+
+    let appData = JSON.parse(localStorage.getItem('antigravity_prep_2027')) || initialSeed;
+
+    function persist() {
+      localStorage.setItem('antigravity_prep_2027', JSON.stringify(appData));
+      updateGlobalReadiness();
+    }
+
+    // --- TOAST NOTIFICATIONS ---
+    function notify(message, icon = 'check-circle') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<i data-lucide="${icon}" style="width: 16px; height: 16px; color: var(--accent-success);"></i> <span>${message}</span>`;
+      container.appendChild(toast);
+      lucide.createIcons();
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-10px)';
+        toast.style.transition = 'all 180ms ease';
+        setTimeout(() => toast.remove(), 180);
+      }, 3500);
+    }
+
+    // --- NAVIGATION TAB ROUTER ---
+    const breadcrumbTitles = {
+      roadmap: '12-Month Profile Roadmap',
+      scholarships: 'Scholarship Pipeline & Alignment',
+      portfolio: 'Brand Design Portfolio Studio',
+      impact: 'Extracurricular Impact Journal',
+      testprep: 'Standardized Test Prep & Habit Timer',
+      universities: 'Global University Fit Database'
+    };
+
+    function switchTab(tabKey) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+
+      const targetPane = document.getElementById(`tab-${tabKey}`);
+      const targetNav = document.getElementById(`nav-${tabKey}`);
+      if (targetPane) targetPane.classList.remove('hidden');
+      if (targetNav) targetNav.classList.add('active');
+
+      document.getElementById('breadcrumb-title').innerText = breadcrumbTitles[tabKey] || 'Workspace';
+      lucide.createIcons();
+    }
+
+    // --- THEME SWITCHER (DARK / LIGHT) ---
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('theme-icon');
+      if (html.classList.contains('light')) {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        icon.setAttribute('data-lucide', 'sun');
+        notify('Switched to Dark theme', 'moon');
+      } else {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        icon.setAttribute('data-lucide', 'moon');
+        notify('Switched to Light theme', 'sun');
+      }
+      lucide.createIcons();
+    }
+
+    // --- MACRO READINESS UPDATE ---
+    function updateGlobalReadiness() {
+      const total = appData.tasks.length;
+      const completed = appData.tasks.filter(t => t.done).length;
+      const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+      document.getElementById('sidebar-progress-num').innerText = `${pct}%`;
+      document.getElementById('sidebar-progress-bar').style.width = `${pct}%`;
+
+      // Update Impact Tab Stats
+      const logCount = appData.impactLogs.length;
+      const totalBeneficiaries = appData.impactLogs.reduce((acc, curr) => acc + (parseInt(curr.people) || 0), 0);
+
+      const elLogs = document.getElementById('stat-log-count');
+      const elPeople = document.getElementById('stat-impact-people');
+      const elProjects = document.getElementById('stat-impact-projects');
+      const elHooks = document.getElementById('stat-impact-hooks');
+
+      if (elLogs) elLogs.innerText = logCount;
+      if (elPeople) elPeople.innerText = totalBeneficiaries;
+      if (elProjects) elProjects.innerText = appData.projects.length;
+      if (elHooks) elHooks.innerText = logCount;
+    }
+
+    // --- ROADMAP & TASKS RENDER ---
+    let activePhaseFilter = 'all';
+
+    function filterRoadmap(phase, btnElement) {
+      activePhaseFilter = phase;
+      document.querySelectorAll('.btn-phase').forEach(b => {
+        b.classList.remove('btn-secondary', 'active');
+        b.classList.add('btn-ghost');
+      });
+      btnElement.classList.remove('btn-ghost');
+      btnElement.classList.add('btn-secondary', 'active');
+      renderRoadmap();
+    }
+
+    function renderRoadmap() {
+      const list = document.getElementById('roadmap-list');
+      list.innerHTML = '';
+
+      const items = activePhaseFilter === 'all'
+        ? appData.tasks
+        : appData.tasks.filter(t => t.phase == activePhaseFilter);
+
+      items.forEach(task => {
+        const item = document.createElement('div');
+        item.className = 'card';
+        item.style.padding = '16px';
+        item.style.display = 'flex';
+        item.style.alignItems = 'flex-start';
+        item.style.gap = '12px';
+
+        const phaseBadges = {
+          1: 'badge-info',
+          2: 'badge-primary',
+          3: 'badge-warning',
+          4: 'badge-success'
+        };
+
+        item.innerHTML = `
+          <input type="checkbox" ${task.done ? 'checked' : ''} onchange="toggleTask(${task.id})" style="margin-top: 3px; accent-color: var(--accent-primary); width: 16px; height: 16px; cursor: pointer;" />
+          <div style="flex: 1;">
+            <div class="flex items-center justify-between" style="margin-bottom: 6px;">
+              <span class="badge ${phaseBadges[task.phase]}">Phase ${task.phase}</span>
+              <span style="font-size: 11px; color: var(--text-secondary); font-weight: 500;">${task.due}</span>
+            </div>
+            <div style="font-size: 13px; font-weight: 500; color: ${task.done ? 'var(--text-tertiary)' : 'var(--text-primary)'}; text-decoration: ${task.done ? 'line-through' : 'none'};">
+              ${task.title}
+            </div>
+          </div>
+          <button class="btn btn-ghost" onclick="deleteTask(${task.id})" style="padding: 0; width: 28px; height: 28px; color: var(--text-tertiary);">
+            <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+          </button>
+        `;
+        list.appendChild(item);
+      });
+      lucide.createIcons();
+    }
+
+    function toggleTask(id) {
+      appData.tasks = appData.tasks.map(t => t.id === id ? { ...t, done: !t.done } : t);
+      persist();
+      renderRoadmap();
+      notify('Milestone status updated');
+    }
+
+    function deleteTask(id) {
+      appData.tasks = appData.tasks.filter(t => t.id !== id);
+      persist();
+      renderRoadmap();
+      notify('Task removed', 'trash');
+    }
+
+    function saveTask() {
+      const title = document.getElementById('task-input-title').value.trim();
+      const phase = parseInt(document.getElementById('task-input-phase').value);
+      const due = document.getElementById('task-input-due').value.trim() || 'Prep Year';
+
+      if (!title) return alert('Please enter a milestone title');
+      appData.tasks.push({ id: Date.now(), phase, title, due, done: false });
+      persist();
+      closeModal('modal-task');
+      document.getElementById('task-input-title').value = '';
+      renderRoadmap();
+      notify('New milestone added');
+    }
+
+    // --- SCHOLARSHIP PIPELINE RENDER ---
+    function renderScholarships() {
+      const container = document.getElementById('scholarship-list');
+      container.innerHTML = '';
+
+      appData.scholarships.forEach(s => {
+        const item = document.createElement('div');
+        item.className = 'card';
+        item.style.padding = '18px';
+        item.innerHTML = `
+          <div class="flex items-center justify-between" style="margin-bottom: 8px;">
+            <div>
+              <div style="font-size: 14px; font-weight: 600; color: var(--text-primary);">${s.name}</div>
+              <div style="font-size: 12px; color: var(--accent-primary); font-weight: 500;">${s.institution}</div>
+            </div>
+            <span class="badge badge-success">${s.match}% Match</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2" style="font-size: 12px; margin-top: 10px; color: var(--text-secondary);">
+            <div><strong style="color: var(--text-primary);">Coverage:</strong> ${s.coverage}</div>
+            <div><strong style="color: var(--text-primary);">Target Window:</strong> ${s.deadline}</div>
+          </div>
+          <div style="font-size: 12px; color: var(--text-secondary); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border-color);">
+            <strong style="color: var(--text-primary);">Admissions Note:</strong> ${s.notes}
+          </div>
+        `;
+        container.appendChild(item);
+      });
+      lucide.createIcons();
+    }
+
+    function runFitCalculation() {
+      const need = parseInt(document.getElementById('calc-need').value);
+      const spike = parseInt(document.getElementById('calc-spike').value);
+      const test = parseInt(document.getElementById('calc-test').value);
+
+      const composite = Math.round((need * 0.40) + (spike * 0.35) + (test * 0.25));
+      document.getElementById('fit-score-badge').innerText = `${composite} / 100 FIT`;
+
+      appData.scholarships = appData.scholarships.map((s, idx) => {
+        const variance = (idx * 2) % 6;
+        return { ...s, match: Math.min(99, Math.max(72, composite - variance)) };
+      });
+      renderScholarships();
+      notify('Institutional alignment recalculated');
+    }
+
+    // --- PORTFOLIO STUDIO RENDER ---
+    function renderPortfolio() {
+      const grid = document.getElementById('portfolio-grid');
+      grid.innerHTML = '';
+
+      appData.projects.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style.display = 'flex';
+        card.style.flexDirection = 'column';
+        card.style.justifyContent = 'space-between';
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between" style="margin-bottom: 12px;">
+              <span class="badge badge-primary">${p.status}</span>
+              <button class="btn btn-ghost" onclick="deleteProject(${p.id})" style="padding: 0; width: 24px; height: 24px; color: var(--text-tertiary);">
+                <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+              </button>
+            </div>
+            <h4 style="font-size: 15px; margin-bottom: 8px;">${p.title}</h4>
+            <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+              <strong style="color: var(--text-primary);">Problem:</strong> ${p.problem}<br /><br />
+              <strong style="color: var(--text-primary);">Solution:</strong> ${p.solution}
+            </div>
+          </div>
+          <div style="padding-top: 12px; border-top: 1px solid var(--border-color); font-size: 12px; color: var(--accent-success); font-weight: 500;">
+            Outcome: ${p.metric}
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    function saveProject() {
+      const title = document.getElementById('proj-input-title').value.trim();
+      const problem = document.getElementById('proj-input-problem').value.trim();
+      const solution = document.getElementById('proj-input-solution').value.trim();
+      const metric = document.getElementById('proj-input-metric').value.trim();
+
+      if (!title || !problem) return alert('Please enter project title and problem statement');
+      appData.projects.push({ id: Date.now(), title, problem, solution, metric, status: 'In Development' });
+      persist();
+      closeModal('modal-project');
+      renderPortfolio();
+      notify('Design case study created');
+    }
+
+    function deleteProject(id) {
+      appData.projects = appData.projects.filter(p => p.id !== id);
+      persist();
+      renderPortfolio();
+      notify('Project removed');
+    }
+
+    // --- IMPACT JOURNAL RENDER ---
+    function renderImpactLogs() {
+      const list = document.getElementById('impact-log-list');
+      list.innerHTML = '';
+
+      appData.impactLogs.forEach(entry => {
+        const item = document.createElement('div');
+        item.className = 'card';
+        item.innerHTML = `
+          <div class="flex items-center justify-between" style="margin-bottom: 12px;">
+            <div>
+              <span style="font-size: 14px; font-weight: 600; color: var(--text-primary);">${entry.role}</span>
+              <span style="font-size: 12px; color: var(--accent-warning); margin-left: 8px; font-weight: 500;">${entry.date}</span>
+            </div>
+            <button class="btn btn-ghost" onclick="deleteImpactLog(${entry.id})" style="padding: 0; width: 24px; height: 24px; color: var(--text-tertiary);">
+              <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+            </button>
+          </div>
+          <div class="grid grid-cols-2 gap-4" style="font-size: 12px; line-height: 1.5;">
+            <div><strong style="color: var(--text-primary);">Context (C):</strong> <span style="color: var(--text-secondary);">${entry.context}</span></div>
+            <div><strong style="color: var(--text-primary);">Action (A):</strong> <span style="color: var(--text-secondary);">${entry.action}</span></div>
+            <div><strong style="color: var(--accent-success);">Result (R):</strong> <span style="color: var(--text-primary); font-weight: 500;">${entry.result}</span></div>
+            <div><strong style="color: var(--accent-primary);">Essay Narrative Hook:</strong> <span style="color: var(--text-secondary); font-style: italic;">"${entry.reflection}"</span></div>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+      lucide.createIcons();
+    }
+
+    function saveImpactLog() {
+      const role = document.getElementById('impact-input-role').value.trim();
+      const context = document.getElementById('impact-input-c').value.trim();
+      const action = document.getElementById('impact-input-a').value.trim();
+      const result = document.getElementById('impact-input-r').value.trim();
+      const reflection = document.getElementById('impact-input-ref').value.trim();
+
+      if (!role || !action) return alert('Please complete the role and action fields');
+      appData.impactLogs.push({
+        id: Date.now(),
+        date: new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+        role, context, action, result, reflection,
+        people: 25
+      });
+      persist();
+      closeModal('modal-impact');
+      renderImpactLogs();
+      notify('Monthly impact logged');
+    }
+
+    function deleteImpactLog(id) {
+      appData.impactLogs = appData.impactLogs.filter(i => i.id !== id);
+      persist();
+      renderImpactLogs();
+      notify('Log entry removed');
+    }
+
+    // --- UNIVERSITY DATABASE RENDER ---
+    function renderUniversityTable() {
+      const tbody = document.getElementById('uni-table-body');
+      const search = document.getElementById('uni-search-input').value.toLowerCase();
+      const region = document.getElementById('uni-region-select').value;
+      const aid = document.getElementById('uni-aid-select').value;
+
+      tbody.innerHTML = '';
+
+      const filtered = appData.universities.filter(u => {
+        const matchesSearch = u.name.toLowerCase().includes(search) || u.country.toLowerCase().includes(search);
+        const matchesRegion = region === 'all' || u.region === region;
+        const matchesAid = aid === 'all' || u.aid === aid;
+        return matchesSearch && matchesRegion && matchesAid;
+      });
+
+      filtered.forEach(u => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><strong>${u.name}</strong><br /><span style="font-size: 11px; color: var(--text-secondary);">${u.country}</span></td>
+          <td><span class="badge badge-neutral">${u.region}</span></td>
+          <td><span style="color: var(--accent-primary); font-weight: 500;">${u.aid}</span></td>
+          <td style="color: var(--text-secondary);">${u.slideroom}</td>
+          <td><span class="badge badge-success">${u.match}%</span></td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function filterUniTable() {
+      renderUniversityTable();
+    }
+
+    // --- SCORES & SLIDERS ---
+    function updateScores() {
+      const math = parseInt(document.getElementById('sat-math-range').value);
+      const rw = parseInt(document.getElementById('sat-rw-range').value);
+      const det = parseInt(document.getElementById('det-range').value);
+
+      document.getElementById('sat-math-num').innerText = math;
+      document.getElementById('sat-rw-num').innerText = rw;
+      document.getElementById('sat-total-badge').innerText = `${math + rw} / 1600`;
+      document.getElementById('det-num-badge').innerText = `${det} / 160`;
+    }
+
+    // --- 45-MIN TIMER ENGINE ---
+    let timerInt = null;
+    let secondsRemaining = 45 * 60;
+    let timerRunning = false;
+
+    function toggleTimer() {
+      const btn = document.getElementById('timer-btn');
+      if (timerRunning) {
+        clearInterval(timerInt);
+        timerRunning = false;
+        btn.innerHTML = `<i data-lucide="play" style="width: 15px; height: 15px;"></i> <span>Resume Sprint</span>`;
+      } else {
+        timerRunning = true;
+        btn.innerHTML = `<i data-lucide="pause" style="width: 15px; height: 15px;"></i> <span>Pause Sprint</span>`;
+        timerInt = setInterval(() => {
+          if (secondsRemaining > 0) {
+            secondsRemaining--;
+            const mins = Math.floor(secondsRemaining / 60).toString().padStart(2, '0');
+            const secs = (secondsRemaining % 60).toString().padStart(2, '0');
+            document.getElementById('timer-clock').innerText = `${mins}:${secs}`;
+          } else {
+            clearInterval(timerInt);
+            timerRunning = false;
+            notify('45-minute daily study habit complete!', 'award');
+            resetTimer();
+          }
+        }, 1000);
+      }
+      lucide.createIcons();
+    }
+
+    function resetTimer() {
+      clearInterval(timerInt);
+      timerRunning = false;
+      secondsRemaining = 45 * 60;
+      document.getElementById('timer-clock').innerText = '45:00';
+      document.getElementById('timer-btn').innerHTML = `<i data-lucide="play" style="width: 15px; height: 15px;"></i> <span>Start Sprint</span>`;
+      lucide.createIcons();
+    }
+
+    // --- MODAL HELPERS ---
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+    // --- BACKUP EXPORT ---
+    function exportData() {
+      const blob = new Blob([JSON.stringify(appData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Antigravity_Prep_2027_Backup_${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      notify('Backup JSON exported');
+    }
+
+    // --- INITIALIZE ON LOAD ---
+    function bootstrap() {
+      renderRoadmap();
+      renderScholarships();
+      renderPortfolio();
+      renderImpactLogs();
+      renderUniversityTable();
+      updateGlobalReadiness();
+      lucide.createIcons();
+    }
+
+    document.addEventListener('DOMContentLoaded', bootstrap);
+  </script>
+</body>
+</html>
